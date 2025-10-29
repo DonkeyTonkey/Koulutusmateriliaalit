@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <title>Bonk – Diaesitys (Play/Pause)</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+    }
+
+    iframe {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    #controls {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+    }
+
+    button {
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      font-size: 18px;
+      padding: 10px 25px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: rgba(255,255,255,0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PDF-diaesitys -->
+  <iframe id="pdfFrame"
+    src="https://rawcdn.githack.com/DonkeyTonkey/Koulutusmateriliaalit/main/Eistys1.pdf#toolbar=0&navpanes=0&scrollbar=0&page=1"
+    allowfullscreen>
+  </iframe>
+
+  <!-- Play/Pause -nappi -->
+  <div id="controls">
+    <button id="toggleBtn">⏸ Pysäytä</button>
+  </div>
+
+  <script>
+    const totalSlides = 3;    // PDF:n sivujen määrä
+    const intervalTime = 5000; // 5 sekuntia / dia
+
+    let currentPage = 1;
+    let playing = true;
+    let timer = null;
+
+    const frame = document.getElementById("pdfFrame");
+    const button = document.getElementById("toggleBtn");
+
+    const baseSrc = "https://rawcdn.githack.com/DonkeyTonkey/Koulutusmateriliaalit/main/Eistys1.pdf#toolbar=0&navpanes=0&scrollbar=0&page=";
+
+    function startShow() {
+      timer = setInterval(() => {
+        currentPage = (currentPage % totalSlides) + 1;
+        frame.src = baseSrc + currentPage;
+      }, intervalTime);
+      button.textContent = "⏸ Pysäytä";
+    }
+
+    function stopShow() {
+      clearInterval(timer);
+      timer = null;
+      button.textContent = "▶️ Jatka";
+    }
+
+    button.onclick = () => {
+      playing = !playing;
+      if (playing) startShow();
+      else stopShow();
+    };
+
+    // käynnistä esitys automaattisesti
+    startShow();
+  </script>
+
+</body>
+</html>
