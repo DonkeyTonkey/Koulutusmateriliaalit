@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML Diaesitys</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+
+    #playBtn {
+      padding: 15px 40px;
+      font-size: 20px;
+      background-color: #0078d4;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    #playBtn:hover {
+      background-color: #005fa3;
+    }
+
+    #slideshow {
+      display: none;
+      width: 80%;
+      max-width: 800px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .slide {
+      display: none;
+      padding: 60px 30px;
+      font-size: 1.5em;
+    }
+
+    .active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <button id="playBtn">▶️ Play</button>
+
+  <div id="slideshow">
+    <div class="slide active">
+      <h2>Tervetuloa diaesitykseen</h2>
+      <p>Tämä on ensimmäinen dia.</p>
+    </div>
+    <div class="slide">
+      <h2>Toinen dia</h2>
+      <p>Tässä voisi olla kuva, tekstiä tai video.</p>
+    </div>
+    <div class="slide">
+      <h2>Kolmas dia</h2>
+      <p>Kiitos katsomisesta!</p>
+    </div>
+  </div>
+
+  <script>
+    const playBtn = document.getElementById('playBtn');
+    const slideshow = document.getElementById('slideshow');
+    const slides = document.querySelectorAll('.slide');
+    let index = 0;
+
+    playBtn.onclick = () => {
+      playBtn.style.display = 'none';
+      slideshow.style.display = 'block';
+      setInterval(() => {
+        slides[index].classList.remove('active');
+        index = (index + 1) % slides.length;
+        slides[index].classList.add('active');
+      }, 3000); // vaihda diaa 3 sekunnin välein
+    };
+  </script>
+
+</body>
+</html>
