@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <title>Bonk – Diaesitys (puhdas näkymä)</title>
+  <style>
+    html, body {height:100%;margin:0;background:#000;overflow:hidden}
+    iframe {
+      position:fixed;inset:0;border:none;width:100%;height:100%;
+    }
+    #controls {
+      position:fixed;bottom:30px;left:50%;transform:translateX(-50%);
+      z-index:10
+    }
+    button {
+      background:rgba(0,0,0,.6);color:#fff;border:2px solid #fff;
+      border-radius:10px;font-size:18px;padding:10px 25px;cursor:pointer
+    }
+  </style>
+</head>
+<body>
+  <iframe id="pdfFrame"
+    src="https://rawcdn.githack.com/DonkeyTonkey/Koulutusmateriliaalit/main/Eistys1.pdf#page=1&toolbar=0&navpanes=0&scrollbar=0"
+    allowfullscreen>
+  </iframe>
+  <div id="controls">
+    <button id="toggleBtn">⏸ Pysäytä</button>
+  </div>
+  <script>
+    const totalSlides = 3, intervalTime = 5000;
+    let currentPage = 1, playing = true, timer;
+    const frame = document.getElementById("pdfFrame");
+    const btn = document.getElementById("toggleBtn");
+    const base =
+      "https://rawcdn.githack.com/DonkeyTonkey/Koulutusmateriliaalit/main/Eistys1.pdf#toolbar=0&navpanes=0&scrollbar=0&page=";
+    function start() {
+      timer = setInterval(()=>{
+        currentPage = (currentPage % totalSlides)+1;
+        frame.src = base + currentPage;
+      },intervalTime);
+      btn.textContent="⏸ Pysäytä";
+    }
+    function stop(){clearInterval(timer);btn.textContent="▶️ Jatka";}
+    btn.onclick=()=>{playing=!playing;playing?start():stop();};
+    start();
+  </script>
+</body>
+</html>
