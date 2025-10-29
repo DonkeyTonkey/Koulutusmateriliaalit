@@ -79,9 +79,11 @@
     const slides = document.querySelectorAll("img");
     const btn = document.getElementById("toggleBtn");
     let index = 0;
-    let playing = true;
+    let playing = false;
     const intervalTime = 4000;
     let timer;
+    let totalSlides = 5
+    let currentPage = 1;
 
     function showSlide(i) {
       slides.forEach(s => s.classList.remove("active"));
@@ -102,12 +104,16 @@
     }
 
     btn.onclick = () => {
-      playing = !playing;
-      if (playing) startShow();
-      else stopShow();
+      if (!playing) {
+      playing = true;
+      startShow();
+      } else {
+        playing = false;
+        stopShow();
+      }
     };
-
-   
+  
+   //startShow();
   </script>
 
 </body>
