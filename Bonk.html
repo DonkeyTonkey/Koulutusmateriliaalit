@@ -2,7 +2,7 @@
 <html lang="fi">
 <head>
   <meta charset="UTF-8">
-  <title>Bonk PDF-diaesitys</title>
+  <title>Bonk - PDF-diaesitys</title>
   <style>
     body {
       font-family: sans-serif;
@@ -11,6 +11,7 @@
       margin: 0;
       padding: 2rem;
     }
+
     #playBtn {
       padding: 15px 40px;
       font-size: 20px;
@@ -20,6 +21,11 @@
       border-radius: 8px;
       cursor: pointer;
     }
+
+    #playBtn:hover {
+      background-color: #005fa3;
+    }
+
     #slideshow {
       display: none;
       margin: 2rem auto;
@@ -28,8 +34,15 @@
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
-    .slide {display: none;}
-    .active {display: block;}
+
+    .slide {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+
     iframe {
       width: 100%;
       height: 600px;
@@ -39,7 +52,7 @@
 </head>
 <body>
 
-  <button id="playBtn">▶️ Käynnistä esityksesi</button>
+  <button id="playBtn">▶️ Käynnistä esitys</button>
 
   <div id="slideshow">
     <div class="slide active">
@@ -66,9 +79,10 @@
         slides[index].classList.remove("active");
         index = (index + 1) % slides.length;
         slides[index].classList.add("active");
-      }, 4000);
+      }, 4000); // vaihtaa diaa 4 sek välein
     };
   </script>
 
 </body>
 </html>
+
